@@ -2,7 +2,7 @@ require 'attribute'
 
 describe "An attribute" do
   
-  subject(:attribute) {Attribute.new}
+  subject(:attribute) {Attribute.new("","",String)}
   
   it "has a property" do
     attribute.add_property("sample")
@@ -27,6 +27,13 @@ describe "An attribute" do
   it "should be created with non info and String type" do
     attribute.property.should == ""
     attribute.value.should == ""
+    attribute.type.should == String
+  end
+  
+  it "has a default constructor which set its attributes" do
+    attribute = Attribute.new("property", "value", String)
+    attribute.property.should == "property"
+    attribute.value.should == "value"
     attribute.type.should == String
   end
   

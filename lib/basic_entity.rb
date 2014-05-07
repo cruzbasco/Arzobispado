@@ -1,9 +1,9 @@
-class Entity
+class BasicEntity
   
   attr_reader :attributes
     
   def initialize 
-    @main_attribute = Attribute.new
+    @main_attribute = Attribute.new("Cargo","",String)
     @attributes = []
   end
   
@@ -25,6 +25,10 @@ class Entity
   
   def remove_attribute (attribute)
     @attributes.delete_if{|a| a.object_id == attribute.object_id}
+  end
+  
+  def search_attribute (data)
+    @attributes.select{|a| a.property == data || a.value == data}.first
   end
   
 end

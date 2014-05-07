@@ -1,12 +1,13 @@
-require 'entity'
+require 'basic_entity'
 
 describe "An entity" do
   
-  subject(:entity) {Entity.new}
+  subject(:entity) {BasicEntity.new}
+  subject(:attribute) {Attribute.new("","",String)}
   
   context "starts with" do
     it "an empty primary attribute" do
-      entity.main_property.should == ""
+      entity.main_property.should == "Cargo"
       entity.main_value.should == ""
       entity.main_type.should == String
     end
@@ -18,16 +19,36 @@ describe "An entity" do
   
   context "with attributes" do
     it "isn't empty if has attributes" do
-      entity.add_attribute(Attribute.new)
+      entity.add_attribute(attribute)
       entity.attributes.should_not == []
     end
     
     it "is empty when add and remove attribute" do
-      attribute = Attribute.new
       entity.add_attribute(attribute)
       entity.remove_attribute(attribute)
       entity.attributes.should == []
     end
+    
+    it "returns all of its attributes"do
+      entity.add_attribute(attribute)
+      entity.add_attribute(attribute)
+      entity.attributes.count.should == 2
+    end
+    
+    it "an attribute can be searched by property" do
+      entity.add_attribute(attribute)
+      entity.add_attribute(Attribute.new("buscar aqui","",String))
+      entity.add_attribute(attribute)
+      entity.search_attribute("buscar aqui").property.should == "buscar aqui"
+    end
+    
+    it "an attribute can be searched by value" do
+      entity.add_attribute(attribute)
+      entity.add_attribute(Attribute.new("","buscar aqui",String))
+      entity.add_attribute(attribute)  
+      entity.search_attribute("buscar aqui").value.should == "buscar aqui"
+    end
+    
   end
   
 end

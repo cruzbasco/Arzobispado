@@ -2,10 +2,10 @@ class Attribute
   
   attr_reader :property, :value, :type
   
-  def initialize
-    @property = ""
-    @value = ""
-    @type = String
+  def initialize (property, value , type)
+    @property = property
+    @value = value
+    @type = type
   end
   
   def add_property (property)
