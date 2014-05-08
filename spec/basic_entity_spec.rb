@@ -15,6 +15,13 @@ describe "An entity" do
     it "empty attributes" do
       entity.attributes.should == []
     end
+    
+    it "could modify its own primary attribute" do
+      entity.change_primary_attribute("cambio","cambio",Integer)
+      entity.main_property.should == "cambio"
+      entity.main_value.should == "cambio"
+      entity.main_type.should == Integer
+    end
   end
   
   context "with attributes" do
@@ -25,7 +32,7 @@ describe "An entity" do
     
     it "is empty when add and remove attribute" do
       entity.add_attribute(attribute)
-      entity.remove_attribute(attribute)
+      entity.remove_attribute(attribute.object_id)
       entity.attributes.should == []
     end
     
