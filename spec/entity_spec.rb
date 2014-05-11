@@ -1,9 +1,9 @@
-require 'basic_entity'
+require 'entity'
 
 describe "An entity" do
   
   subject(:text_type) {TextType.new}
-  subject(:entity) {BasicEntity.new(Attribute.new("Position","",text_type,Information::PUBLIC))}
+  subject(:entity) {Entity.new(Attribute.new("Position","",text_type,Information::PUBLIC))}
   subject(:attribute) {Attribute.new("","",text_type,Information::PUBLIC)}
   
   context "starts with" do
@@ -65,6 +65,43 @@ describe "An entity" do
       entity.add_attribute(Attribute.new("","buscar aqui",TextType.new,Information::PUBLIC))
       entity.add_attribute(attribute)  
       entity.search_attribute("buscar aqui").value.should == "buscar aqui"
+    end
+  end
+  
+  context "with entities" do
+    it "has no data if its new" do
+      entity.entities.should == []
+    end
+    
+    it "could add many entities as it needed" do
+      entity.add_entity(Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC)))
+      entity.add_entity(Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC)))
+      entity.entities.count.should == 2
+    end
+    
+    it "could remove many entities as it needed" do
+      entity_demo = Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC))
+      entity.add_entity(entity_demo)
+      entity.add_entity(Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC)))
+      entity.remove_entity(entity_demo.object_id)
+      entity.entities.count.should == 1
+    end
+    
+    it "could search an specific entity" do
+      entity_demo = Entity.new(Attribute.new("Position","search_it",TextType.new,Information::PRIVATE))
+      entity.add_entity(Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC)))
+      entity.add_entity(entity_demo)
+      entity.add_entity(Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC)))
+      entity.search_entity("search_it").count.should == 1
+    end
+  end
+  
+  context "in order to save" do
+    it "should clear the entities" do
+      entity.add_entity(Entity.new(Attribute.new("Position","",TextType.new,Information::PUBLIC)))
+      entity.entities.count.should == 1
+      entity.clear_entities
+      entity.entities.count.should == 0
     end
   end
   
