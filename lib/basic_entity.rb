@@ -43,5 +43,10 @@ class BasicEntity
   def search_attribute (data)
     @attributes.select{|attribute| attribute.property == data || attribute.value == data}.first
   end
+
+  def set_attributes(attributes, visible)
+    @attributes=attributes
+    @visible=visible
+  end
   
 end

@@ -18,5 +18,11 @@ class ComposeEntity < BasicEntity
   def search_entity (data)
     @entities.select{|entity| entity.main_value == data}
   end
+
+  def get_base_entity
+    entity =BasicEntity.new(@main_attribute)
+    entity.set_attributes(@attributes, @visible)
+    entity
+  end
   
 end
