@@ -1,11 +1,12 @@
-class BasicEntity
+class Entity
   
-  attr_reader :attributes
+  attr_reader :attributes, :entities
     
   def initialize (attribute)
     @main_attribute = attribute
     @attributes = []
     @visible = Information::PUBLIC
+    @entities = []
   end
   
   def main_property
@@ -47,6 +48,22 @@ class BasicEntity
   def set_attributes(attributes, visible)
     @attributes=attributes
     @visible=visible
+  end
+  
+  def add_entity (entity)
+    @entities.push(entity)
+  end
+  
+  def remove_entity (entity_id)
+    @entities.delete_if{|e| e.object_id == entity_id}
+  end
+  
+  def search_entity (data)
+    @entities.select{|entity| entity.main_value == data}
+  end
+  
+  def clear_entities
+    @entities = []
   end
   
 end
