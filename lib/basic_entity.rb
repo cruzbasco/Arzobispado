@@ -2,9 +2,10 @@ class BasicEntity
   
   attr_reader :attributes
     
-  def initialize 
-    @main_attribute = Attribute.new("Cargo","",String)
+  def initialize (attribute)
+    @main_attribute = attribute
     @attributes = []
+    @visible = Information::PUBLIC
   end
   
   def main_property
@@ -19,8 +20,16 @@ class BasicEntity
     @main_attribute.type
   end
   
-  def change_primary_attribute (property, value, type)
-    @main_attribute = Attribute.new(property,value,type)
+  def set_visible (visible)
+    @visible = visible
+  end
+  
+  def is_visible?
+    @visible
+  end
+  
+  def change_primary_attribute (property, value, type, visible)
+    @main_attribute = Attribute.new(property,value,type,visible)
   end
   
   def add_attribute (attribute)
@@ -28,11 +37,11 @@ class BasicEntity
   end
   
   def remove_attribute (attribute_id)
-    @attributes.delete_if{|a| a.object_id == attribute_id}
+    @attributes.delete_if{|attribute| attribute.object_id == attribute_id}
   end
   
   def search_attribute (data)
-    @attributes.select{|a| a.property == data || a.value == data}.first
+    @attributes.select{|attribute| attribute.property == data || attribute.value == data}.first
   end
   
 end

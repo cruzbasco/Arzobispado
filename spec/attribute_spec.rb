@@ -1,8 +1,9 @@
 require 'attribute'
+require 'information'
 
 describe "An attribute" do
-  
-  subject(:attribute) {Attribute.new("","",String)}
+  subject(:text_type) {TextType.new}
+  subject(:attribute) {Attribute.new("","",text_type,Information::PUBLIC)}
   
   it "has a property" do
     attribute.add_property("sample")
@@ -15,26 +16,33 @@ describe "An attribute" do
   end
   
   it "has a type like String" do
-    attribute.add_type(String)
-    attribute.type.should == String
+    attribute.add_type(text_type)
+    attribute.type.should == text_type
   end
   
-  it "has a type like Integer" do
-    attribute.add_type(Integer)
-    attribute.type.should == Integer
+  it "is visible if is public" do
+    attribute.add_visible(Information::PUBLIC)
+    attribute.is_visible?.should == true
   end
   
-  it "should be created with non info and String type" do
+  it "is non visible if is private" do
+    attribute.add_visible(Information::PRIVATE)
+    attribute.is_visible?.should == false
+  end
+  
+  it "should be created with non info and TextType as default" do
     attribute.property.should == ""
     attribute.value.should == ""
-    attribute.type.should == String
+    attribute.type.should == text_type
+    attribute.is_visible?.should == true
   end
   
   it "has a default constructor which set its attributes" do
-    attribute = Attribute.new("property", "value", String)
+    attribute = Attribute.new("property", "value", text_type, Information::PUBLIC)
     attribute.property.should == "property"
     attribute.value.should == "value"
-    attribute.type.should == String
+    attribute.type.should == text_type
+    attribute.is_visible?.should == true
   end
   
 end

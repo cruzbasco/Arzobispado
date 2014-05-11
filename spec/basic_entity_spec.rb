@@ -2,14 +2,16 @@ require 'basic_entity'
 
 describe "An entity" do
   
-  subject(:entity) {BasicEntity.new}
-  subject(:attribute) {Attribute.new("","",String)}
+  subject(:text_type) {TextType.new}
+  subject(:entity) {BasicEntity.new(Attribute.new("Position","",text_type,Information::PUBLIC))}
+  subject(:attribute) {Attribute.new("","",text_type,Information::PUBLIC)}
   
   context "starts with" do
     it "an empty primary attribute" do
-      entity.main_property.should == "Cargo"
+      entity.main_property.should == "Position"
       entity.main_value.should == ""
-      entity.main_type.should == String
+      entity.main_type.should == text_type
+      entity.is_visible?.should == true
     end
     
     it "empty attributes" do
@@ -17,10 +19,19 @@ describe "An entity" do
     end
     
     it "could modify its own primary attribute" do
-      entity.change_primary_attribute("cambio","cambio",Integer)
+      entity.change_primary_attribute("cambio","cambio",text_type,Information::PUBLIC)
       entity.main_property.should == "cambio"
       entity.main_value.should == "cambio"
-      entity.main_type.should == Integer
+      entity.main_type.should == text_type
+    end
+    
+    it "is visible if is public" do
+      entity.is_visible?.should == true
+    end
+    
+    it "is non visible if is private" do
+      entity.set_visible(Information::PRIVATE)
+      entity.is_visible?.should == false
     end
   end
   
@@ -44,18 +55,17 @@ describe "An entity" do
     
     it "an attribute can be searched by property" do
       entity.add_attribute(attribute)
-      entity.add_attribute(Attribute.new("buscar aqui","",String))
+      entity.add_attribute(Attribute.new("buscar aqui","",TextType.new,Information::PUBLIC))
       entity.add_attribute(attribute)
       entity.search_attribute("buscar aqui").property.should == "buscar aqui"
     end
     
     it "an attribute can be searched by value" do
       entity.add_attribute(attribute)
-      entity.add_attribute(Attribute.new("","buscar aqui",String))
+      entity.add_attribute(Attribute.new("","buscar aqui",TextType.new,Information::PUBLIC))
       entity.add_attribute(attribute)  
       entity.search_attribute("buscar aqui").value.should == "buscar aqui"
     end
-    
   end
   
 end

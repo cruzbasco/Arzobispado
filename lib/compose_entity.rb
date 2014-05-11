@@ -3,7 +3,7 @@ class ComposeEntity < BasicEntity
   attr_reader :entities
   
   def initialize
-    super
+    super (Attribute.new("","",TextType.new,Information::PUBLIC))
     @entities = []
   end
   
@@ -13,6 +13,10 @@ class ComposeEntity < BasicEntity
   
   def remove_entity (entity_id)
     @entities.delete_if{|e| e.object_id == entity_id}
+  end
+  
+  def search_entity (data)
+    @entities.select{|entity| entity.main_value == data}
   end
   
 end
