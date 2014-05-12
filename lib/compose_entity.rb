@@ -1,4 +1,4 @@
-class ComposeEntity < BasicEntity
+class ComposeEntity
   
   attr_reader :entities
   
@@ -20,7 +20,7 @@ class ComposeEntity < BasicEntity
   end
 
   def get_base_entity
-    entity =BasicEntity.new(@main_attribute)
+    entity =Entity.new(@main_attribute)
     entity.set_attributes(@attributes, @visible)
     entity
   end

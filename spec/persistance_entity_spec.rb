@@ -1,11 +1,9 @@
-require 'compose_entity'
-require 'basic_entity'
+require 'entity'
 require 'persistance_entity'
 describe "Persistance entity" do
 
 	subject(:text_type) {TextType.new}
-	subject(:entity) {BasicEntity.new(Attribute.new("Position","probando",text_type,Information::PUBLIC))}
-	subject(:compose_entity) {ComposeEntity.new}
+	subject(:entity) {Entity.new(Attribute.new("Position","probando",text_type,Information::PUBLIC))}
 	subject(:persistance){PersistanceEntity.new}
 
 	it "basic persistance" do
@@ -14,10 +12,6 @@ describe "Persistance entity" do
 
 	it "persistance add entity basic" do
 		persistance.add_entity(entity)
-		persistance.return_hash!={}
-	end
-	it "persistance add entity compose" do
-		persistance.add_entity(compose_entity)
 		persistance.return_hash!={}
 	end
 	

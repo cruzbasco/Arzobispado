@@ -1,10 +1,10 @@
-require 'compose_entity'
-require 'basic_entity'
 require 'Oj'
+require 'persistance_json'
 class PersistanceEntity
 	attr_reader :hash
 
 	def initialize
+		@archive=1
 		@hash = Hash.new
 	end
 
@@ -13,23 +13,16 @@ class PersistanceEntity
 	end
 
 	def add_entity(entity)
-		entity=separate(entity)
+		entity.clear_entities
 		@hash[ :entity.object_id]=entity
-		save_entity_basic_json(entity)
+		save_entity_json(entity)
 	end
 
 	private
-	def separate(compose_entity)
-		if(compose_entity.class==ComposeEntity)
-			compose_entity=compose_entity.get_base_entity
-		end
-			compose_entity
+
+	def save_entity_json(entity)
+		@archive=PersistanceJSON.new(entity.main_value.to_s)
+		@archive.save_entity(entity)
 	end
 
-	def save_entity_basic_json(entity)
-				File.open(entity.main_value+".json" ,"a") do |file|
-     				 file.puts(Oj::dump entity)
-				end
-
-	end
 end
