@@ -1,6 +1,3 @@
-require 'attribute_types/text_type'
-require 'attribute_types/numeric_type'
-
 class Attribute
   
   attr_reader :property, :value, :type

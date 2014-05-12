@@ -1,5 +1,3 @@
-require 'Oj'
-require 'persistance_json'
 class PersistanceEntity
 	attr_reader :hash
 

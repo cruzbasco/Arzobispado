@@ -1,5 +1,7 @@
 require 'attribute'
 require 'information'
+require 'attribute_types/text_type'
+require 'attribute_types/numeric_type'
 
 describe "An attribute" do
   subject(:text_type) {TextType.new}

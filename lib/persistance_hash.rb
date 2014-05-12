@@ -1,4 +1,3 @@
-require 'Oj'
 class PersistanceHash
 	def initialize
 		@archive = PersistanceJSON.new("hashes")
