@@ -4,7 +4,7 @@ class PersistanceEntity
 	attr_reader :hash
 
 	def initialize
-		@archive=1
+		@archive = 1
 		@hash = Hash.new
 	end
 
@@ -14,14 +14,14 @@ class PersistanceEntity
 
 	def add_entity(entity)
 		entity.clear_entities
-		@hash[ :entity.object_id]=entity
+		@hash[ :entity.object_id] = entity
 		save_entity_json(entity)
 	end
 
 	private
 
 	def save_entity_json(entity)
-		@archive=PersistanceJSON.new(entity.main_value.to_s)
+		@archive = PersistanceJSON.new(entity.main_value.to_s)
 		@archive.save_entity(entity)
 	end
 

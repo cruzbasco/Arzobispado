@@ -6,7 +6,7 @@ describe "describe persistance hashes" do
 	subject(:persistance){PersistanceEntity.new}
 	it "hashes add hash" do
 		persistance_hashes.add_hash(persistance)
-		persistance_hashes.return_hashes!={}
+		persistance_hashes.return_hashes != {}
 	end
 
 end
