@@ -1,0 +1,8 @@
+<h1>Registrar Entidad</h1>
+<form class="form-horizontal" action="/create_entity" method="post" name="nuevo" onsubmit="return formulario()">
+		<% @cura.attributes.each do |attribute| %>
+			<%= attribute.non_editable_type %>
+		<%end%>
+		<input type="submit" value="Crear Entidad" class="btn btn-success" />
+	</div>	
+</form> 

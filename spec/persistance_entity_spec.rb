@@ -1,5 +1,7 @@
+require 'oj'
 require 'entity'
 require 'persistance_entity'
+require 'persistance_json'
 describe "Persistance entity" do
 
 	subject(:text_type) {TextType.new}
