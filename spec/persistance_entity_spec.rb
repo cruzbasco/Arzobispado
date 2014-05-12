@@ -7,12 +7,12 @@ describe "Persistance entity" do
 	subject(:persistance){PersistanceEntity.new}
 
 	it "basic persistance" do
-		persistance.return_hash.should=={}
+		persistance.return_hash.should == {}
 	end
 
 	it "persistance add entity basic" do
 		persistance.add_entity(entity)
-		persistance.return_hash!={}
+		persistance.return_hash != {}
 	end
 	
 
