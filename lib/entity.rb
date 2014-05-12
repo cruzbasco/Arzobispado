@@ -1,6 +1,6 @@
 class Entity
   
-  attr_reader :attributes, :entities
+  attr_accessor :attributes, :entities
     
   def initialize (attribute)
     @main_attribute = attribute

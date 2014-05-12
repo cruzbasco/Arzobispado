@@ -1,27 +1,8 @@
-<h1>Registrar Sacerdote</h1>
+<h1>Registrar Entidad</h1>
 <form class="form-horizontal" action="/create_entity" method="post" name="nuevo" onsubmit="return formulario()">
-	<div class = "form-group">
-		<label class="col-md-4 control-label" for="nombre">Nombre y Apellido:</label>
-		<div class="col-md-4">
-			<input name="nombre" type="text" value="" 
-			class="form-control input-md" required=""/>
-		</div>
-	</div>
-	<div class = "form-group">
-		<label class="col-md-4 control-label" for="fecha">Fecha Nacimiento:</label>
-		<div class="col-md-4">
-			<input name="fecha" type="date" value="" 
-			class="form-control input-md" required=""/>
-		</div>
-	</div>
-	<div class = "form-group">
-		<label class="col-md-4 control-label" for="lugar">Lugar de Nacimiento:</label>
-		<div class="col-md-4">
-			<input name="lugar" type="text" value="" 
-			class="form-control input-md" required=""/>
-		</div>
-	</div>
-	<div class = "form-group">
+		<% @cura.attributes.each do |attribute| %>
+			<%= attribute.non_editable_type %>
+		<%end%>
 		<input type="submit" value="Crear Entidad" class="btn btn-success" />
 	</div>	
 </form> 
