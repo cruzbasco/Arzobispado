@@ -32,4 +32,12 @@ class Attribute
     @visible
   end
   
+  def editable_type
+    @type.editable(@property, @value)
+  end
+  
+  def non_editable_type
+    @type.non_editable(@property, @value)
+  end
+  
 end
