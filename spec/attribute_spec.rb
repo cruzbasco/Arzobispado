@@ -45,4 +45,10 @@ describe "An attribute" do
     attribute.is_visible?.should == true
   end
   
+  it "has an editable and non_editable methods" do
+    attribute = Attribute.new("property", "value", text_type, Information::PUBLIC)
+    attribute.editable_type.should == text_type.editable("property", "value")
+    attribute.non_editable_type.should == text_type.non_editable("property", "value")
+  end
+  
 end
